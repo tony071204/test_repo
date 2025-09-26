@@ -1,5 +1,5 @@
 ﻿Countries,"Air transport, passengers carried"
-United States,926737000
+United States of America,926737000
 China,659629060
 Ireland,170161860
 India,167499120
@@ -54,7 +54,7 @@ Pakistan,7420378
 Kuwait,7385299
 Israel,7068458
 Algeria,6752002
-Nigeria,6539048.5
+Niger,6539048.5
 Bahrain,6440562
 Kenya,6417534
 Bangladesh,6260241
@@ -102,7 +102,7 @@ Laos,979307
 Slovenia,869640.1
 Kyrgyzstan,867935
 Bulgaria,832828
-Cote d'Ivoire,748540
+Côte d'Ivoire,748540
 Mongolia,744413
 Cape Verde,675482
 Togo,633629
@@ -110,11 +110,11 @@ Paraguay,632389
 Montenegro,597380
 Ghana,597343
 Mozambique,587364
-Democratic Republic of Congo,550457.9
+Dem. Rep. Congo,550457.9
 Madagascar,544458
 Congo,541787.1
 Tajikistan,539094.6
-Sudan,530001
+S. Sudan,530001
 Antigua and Barbuda,526334
 Georgia,509913
 Vanuatu,466865.06
@@ -155,3 +155,4 @@ Malawi,7117
 Bosnia and Herzegovina,5375
 Estonia,857
 Monaco,316
+
