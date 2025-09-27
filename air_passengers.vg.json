@@ -1,0 +1,122 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Global Air Transport Passengers Carried by Country (2019)",
+  "width": 900,
+  "height": 450,
+  "projection": {"type": "equalEarth"},
+  "layer": [
+    {
+      "data": {"graticule": {"step": [30, 30]}},
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#e0e0e0",
+        "strokeWidth": 0.8,
+        "strokeOpacity": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/tony071204/test_repo/refs/heads/main/ne_110m.json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/tony071204/test_repo/refs/heads/main/Air_passengers_country.csv"
+            },
+            "key": "Countries",
+            "fields": ["Air transport, passengers carried"]
+          }
+        },
+        {
+          "calculate": "datum['Air transport, passengers carried'] == null ? 'Data not available' : format(datum['Air transport, passengers carried'], ',.0f')",
+          "as": "passenger_display"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#B0B0B0",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.8,
+        "strokeDash": [2, 2],
+        "opacity": 0.7
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {
+            "field": "passenger_display",
+            "type": "nominal",
+            "title": "Air Passengers"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/tony071204/test_repo/refs/heads/main/ne_110m.json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/tony071204/test_repo/refs/heads/main/Air_passengers_country.csv"
+            },
+            "key": "Countries",
+            "fields": ["Air transport, passengers carried"]
+          }
+        },
+        {"filter": "datum['Air transport, passengers carried'] != null"}
+      ],
+      "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+      "encoding": {
+        "color": {
+          "field": "Air transport, passengers carried",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [-10, 1, 1000000, 10000000, 50000000, 200000000],
+            "range": [
+              "#B0B0B0",
+              "#B0B0B0",
+              "#A9D6F1",
+              "#55A9F5",
+              "#1479D9",
+              "#074E8B",
+              "#031F4F"
+            ]
+          },
+          "legend": {
+            "title": "Passengers Carried",
+            "titleAlign": "center",
+            "titleFontSize": 14,
+            "titleFontWeight": "bold",
+            "titlePadding": 50,
+            "labelFontSize": 12,
+            "symbolSize": 200,
+            "orient": "right",
+            "offset": 10,
+            "direction": "vertical",
+            "values": [0, 1000000, 10000000, 50000000, 200000000, 300000000],
+            "labelExpr": "datum.value == 0 ? 'No data available' : datum.value == 1000000 ? 'Under 1M' : datum.value == 10000000 ? '1M - 10M' : datum.value == 50000000 ? '10M - 50M' : datum.value == 200000000 ? '50M - 200M' : datum.value == 300000000 ? 'Over 200M' : format(datum.value, '.0s')"
+          }
+        },
+        "tooltip": [
+          {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+          {
+            "field": "Air transport, passengers carried",
+            "type": "quantitative",
+            "title": "Air Passengers",
+            "format": ",.0f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
